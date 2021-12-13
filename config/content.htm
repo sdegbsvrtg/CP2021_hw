@@ -88,7 +88,6 @@
 <p>GitExtensions Git config setup:</p>
 <p><img alt="" height="486" src="https://mde.tw/cad2021_hw/images/GitExtensions_Git_config.png" width="600"/></p>
 <p>以下將請已經完成 GitExtensions 與 SSH 結合使用的學員製作"GitExtensions 導引" Wink, 說明詳細的設定流程.</p>
-<h2>run</h2>
 <p>這個頁面利用 <a href="https://brython.info/">Brython</a> 程式庫, 讓使用者可以直接在瀏覽器中執行 Python 語法程式 (與 CPython <a href="https://brython.info/static_doc/en/stdlib.html">語法比較</a>). Brython 程式庫以 Javascript 編寫, 能在頁面<a href="https://brython.info/static_doc/en/html.html">置入 html,</a> 並<a href="https://brython.info/static_doc/en/jsobjects.html">結合</a>第三方 Javascript 程式庫, 進行 <a href="https://brython.info/gallery/bricks_py.html">2D</a> 與 <a href="https://brython.info/gallery/three.html">3D</a> 繪圖應用. (範例: <a href="https://imvickykumar999.github.io/Chrome-Extension/Brython%20Snake/snake.html">https://imvickykumar999.github.io/Chrome-Extension/Brython%20Snake/snake.html</a> )</p>
 <!-- 導入 brython 程式庫 -->
 <p>
@@ -535,21 +534,97 @@ def launchAnimation(ev):
 doc["power"].bind("click", launchAnimation)
 </pre>
 <p></p>
-<h2>Token</h2>
-<p>當你建立 Github 帳號後就可以利用 Gist 儲存資料或程式碼, 且可以利用 <a href="https://mde.tw/cp2021/content/run.html">https://mde.tw/cp2021/content/run.html</a> 來執行 Brython 程式.</p>
-<p>在 run.html 執行 Brython 程式, 可以使用下列三種方法:</p>
-<ol>
-<li>直接連線至 <a href="https://mde.tw/cp2021/content/run.html">https://mde.tw/cp2021/content/run.html</a> 將 Brython 程式寫在編輯區, 然後按下 Run.</li>
-<li>將 Brython 程式存在 Gist, 利用 run.html?src=Gist_URL, run.html 中的 Javascript 就會導入此 Gist 程式執行.</li>
-<li>將 Brython 程式寫在 run.html 頁面中, 然後安排其中的 Javascript 或 Brython 程式導入執行.</li>
-</ol>
-<p>而上述三種程式的執行若更動 run.html 或取 run.html?src=Gist_URL 連結放入頁面, 都必須要在各自的 cp2021_hw倉儲的動態網站中改版, 轉為靜態網頁內容, 然後新增提交並推送至 Github, 建立個人 Github 帳號對應的Personal Token, 就可以放入近端倉儲 .git/config 中的 origin url 帳號密碼區, 然後將改版資料推送到 Github.</p>
-<p>利用 Personal Token 字串 push 改版資料的步驟:</p>
-<ol>
-<li>至 Github 帳號 settings 下的開發者區域建立能夠更動 repo 的權限, 並且決定此 Token 權限的使用期限.</li>
-<li>將此 Token 字串放入對應倉儲 .git/config 檔案中的 origin url=https://Token_String@github.com/帳號/cp2021_hw.git</li>
-</ol>
-<h2>SSH push</h2>
+<h2>HW1-1</h2>
+<!-- 導入 brython 程式庫 -->
+<script src="/get_page/cmsimde/static/brython.js"></script>
+<script src="/get_page/cmsimde/static/brython_stdlib.js"></script>
+<!-- 啟動 Brython -->
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+<p><!-- 導入 FileSaver 與 filereader --></p>
+<p>
+<script src="/get_page/cmsimde/static/ace/FileSaver.min.js" type="text/javascript"></script>
+<script src="/get_page/cmsimde/static/ace/filereader.js" type="text/javascript"></script>
+</p>
+<p><!-- 導入 ace --></p>
+<p>
+<script src="/get_page/cmsimde/static/ace/ace.js" type="text/javascript"></script>
+<script src="/get_page/cmsimde/static/ace/ext-language_tools.js" type="text/javascript"></script>
+<script src="/get_page/cmsimde/static/ace/mode-python3.js" type="text/javascript"></script>
+<script src="/get_page/cmsimde/static/ace/snippets/python.js" type="text/javascript"></script>
+</p>
+<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
+<p>
+<script type="text/javascript">
+function doSave(storage_id, filename){
+    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
+    filename = document.getElementById(filename).value
+    saveAs(blob, filename+".py");
+}
+</script>
+</p>
+<p><!-- 印出版次與關鍵字程式 --></p>
+<p>
+<script type="text/python3">
+from browser import document as doc
+import ace
+# 清除畫布
+def clear_bd(ev):
+    bd = doc["brython_div"]
+    bd.clear()
+# Brython 3.3.4 內建的 container 名稱為  'container' 且 turtle 輸出為 svg 必須使用 div 訂定 id
+Ace = ace.Editor(editor_id="kw_editor", console_id="kw_console", container_id="kw__container", storage_id="kw_py_src" )
+# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
+def run():
+    # 利用 get 取下 src 變數值
+    try:
+        url = doc.query["src"]
+    except:
+        url = "https://gist.githubusercontent.com/mdecourse/e896a4705a95ac8cc4147b355b0e87ef/raw/8954b8280c524c5781dc3c0b3565bc489d3aa3a3/cango_gear1.py"
+    prog = open(url).read()
+ 
+    # 將程式載入編輯區
+    Ace.editor.setValue(prog)
+    Ace.editor.scrollToRow(0)
+    Ace.editor.gotoLine(0)
+    # 直接執行程式
+    #ns = {'__name__':'__main__'}
+    #exec(prog, ns)
+    # 按下 run 按鈕
+    Ace.run()
+ 
+# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
+doc['kw_run'].bind('click', Ace.run)
+doc['kw_show_console'].bind('click', Ace.show_console)
+doc['kw_clear_console'].bind('click', Ace.clear_console)
+doc['clear_bd'].bind('click', clear_bd)
+# 呼叫函式執行
+run()
+</script>
+</p>
+<p><!-- 用來顯示程式碼的 editor 區域 --></p>
+<div id="kw_editor" style="width: 600px; height: 300px;"></div>
+<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
+<!-- 存擋表單開始 --><form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src', 'kw_filename');" type="submit" value="Save"/></form><!-- 存擋表單結束 -->
+<p></p>
+<!-- 執行與清除按鈕開始 -->
+<p><button id="kw_run">Run</button> <button id="kw_show_console">Output</button> <button id="kw_clear_console">清除輸出區</button><button id="clear_bd">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
+<!-- 執行與清除按鈕結束 -->
+<p></p>
+<!-- 程式執行 ouput 區 -->
+<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console"></textarea></div>
+<!-- Brython 程式執行的結果, 都以 brython_div 作為切入位置 -->
+<div id="brython_div"></div>
+<!-- 導入 gearUtils-0.9.js Cango 齒輪繪圖程式庫 -->
+<script src="https://mde.tw/cp2021/cmsimde/static/Cango-24v03-min.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/gearUtils-09.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/SVGpathUtils-6v03-min.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/sylvester.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/PrairieDraw.js"></script>
+<h2>HW1-2</h2>
 <p>Github 帳號用戶除了可以利用 Personal Token push 改版資料外, 也可以利用 SSH keys 將改版資料 push 到 Github. 詳細說明可以參考 <a href="https://mde.tw/cd2021/content/SSH%20%E4%BA%86%E6%B2%92.html">SSH 了沒</a>.</p>
 <p>以下說明 SSH push 操作步驟:</p>
 <ol>
@@ -2394,3 +2469,96 @@ bfs(visited, graph, 'A')</pre>
 <p style="padding-left: 30px;"><a href="https://bmsleight.github.io/brython-blocks/">https://bmsleight.github.io/brython-blocks/</a></p>
 <p style="padding-left: 60px;"><a href="https://github.com/mdecourse/brython-blocks">https://github.com/mdecourse/brython-blocks</a></p>
 <p style="padding-left: 30px;"><span style="background-color: #ffff99;">下一個階段將要導入 <a href="https://github.com/pyodide/pyodide" style="background-color: #ffff99;">https://github.com/pyodide/pyodide</a></span></p>
+<p>EXAM</p>
+<h1>EXAM</h1>
+<h2>W13</h2>
+<p>第一種在網頁執行 Brython 程式的方法, 是使用者在網際程式編輯區輸入 Brython 程式碼, 必須手動按下 Run 才能執行.</p>
+<!-- 導入 brython 程式庫 -->
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- 啟動 Brython -->
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
+}
+</script>
+<p><!-- 導入 FileSaver 與 filereader --></p>
+<p>
+<script src="/static/ace/FileSaver.min.js" type="text/javascript"></script>
+<script src="/static/ace/filereader.js" type="text/javascript"></script>
+</p>
+<p><!-- 導入 ace --></p>
+<p>
+<script src="/static/ace/ace.js" type="text/javascript"></script>
+<script src="/static/ace/ext-language_tools.js" type="text/javascript"></script>
+<script src="/static/ace/mode-python3.js" type="text/javascript"></script>
+<script src="/static/ace/snippets/python.js" type="text/javascript"></script>
+</p>
+<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
+<p>
+<script type="text/javascript">
+function doSave(storage_id, filename){
+    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
+    filename = document.getElementById(filename).value
+    saveAs(blob, filename+".py");
+}
+</script>
+</p>
+<p><!-- 印出版次與關鍵字程式 --></p>
+<p>
+<script type="text/python3">
+from browser import document as doc
+import ace
+# 清除畫布
+def clear_bd(ev):
+    bd = doc["brython_div"]
+    bd.clear()
+# Brython 3.3.4 內建的 container 名稱為  'container' 且 turtle 輸出為 svg 必須使用 div 訂定 id
+Ace = ace.Editor(editor_id="kw_editor", console_id="kw_console", container_id="kw__container", storage_id="kw_py_src" )
+# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
+def run():
+    # 利用 get 取下 src 變數值
+    try:
+        url = doc.query["src"]
+    except:
+        url = "https://gist.githubusercontent.com/sdegbsvrtg/5b786a5c78269b83412ef625654b9c23/raw/0f01cb54b3f3d6abef53e0f816076902891f09a7/W13"
+    prog = open(url).read()
+
+    # 將程式載入編輯區
+    Ace.editor.setValue(prog)
+    Ace.editor.scrollToRow(0)
+    Ace.editor.gotoLine(0)
+    # 直接執行程式
+    #ns = {'__name__':'__main__'}
+    #exec(prog, ns)
+    # 按下 run 按鈕
+    #Ace.run()
+
+# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
+doc['kw_run'].bind('click', Ace.run)
+doc['kw_show_console'].bind('click', Ace.show_console)
+doc['kw_clear_console'].bind('click', Ace.clear_console)
+doc['clear_bd'].bind('click', clear_bd)
+# 呼叫函式執行
+run()
+</script>
+</p>
+<p><!-- 用來顯示程式碼的 editor 區域 --></p>
+<div id="kw_editor" style="width: 600px; height: 300px;"></div>
+<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
+<!-- 存擋表單開始 --><form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src', 'kw_filename');" type="submit" value="Save"/></form><!-- 存擋表單結束 -->
+<p></p>
+<!-- 執行與清除按鈕開始 -->
+<p><button id="kw_run">Run</button> <button id="kw_show_console">Output</button> <button id="kw_clear_console">清除輸出區</button><button id="clear_bd">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
+<!-- 執行與清除按鈕結束 -->
+<p></p>
+<!-- 程式執行 ouput 區 -->
+<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console"></textarea></div>
+<!-- Brython 程式執行的結果, 都以 brython_div 作為切入位置 -->
+<div id="brython_div"></div>
+<!-- 導入 gearUtils-0.9.js Cango 齒輪繪圖程式庫 -->
+<script src="https://mde.tw/cp2021/cmsimde/static/Cango-24v03-min.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/gearUtils-09.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/SVGpathUtils-6v03-min.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/sylvester.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/PrairieDraw.js"></script>
