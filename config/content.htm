@@ -692,12 +692,7 @@ Exit</pre>
 <p>2. 請登入 Github 帳號後, 連線至 <a href="https://github.com/mdecourse/cp2021_hw">https://github.com/mdecourse/cp2021_hw</a> 後, 透過 <span style="background-color: #00ff00;">Use this template</span> 按鈕建立自己的 cp2021_hw 倉儲. 並至該倉儲的 Settings -&gt; Pages -&gt; Source 將 main 分支設為 Github Pages 的 root (也就是選擇將倉儲的 main 分支設為對應網站的根目錄).</p>
 <p>3. 請將 HW1 與 HW2 的作業內容登錄至個人的 cp2021_hw 倉儲與網站中. (學習如何透過 git 指令修改倉儲中的版本內容)</p>
 <p>4. 請在個人作業網站的 HW2 區域下增設一個 H2 頁面, 將該網頁標題命名為 run, 可以如 <a href="https://mde.tw/cp2021/content/run.html">run</a> 頁面中的內容, 並且利用此頁面收集 Python 範例程式. (例如: 可自動執行的貪食蛇: <a href="https://mde.tw/cp2021/content/run.html?src=https://gist.githubusercontent.com/mdecourse/d306a1f57e53bfd6466eaae20bcb9439/raw/2160a12b9fec9707a120a383ed5d38b9b78a02cf/snake.py">https://mde.tw/cp2021/content/run.html?src=https://gist.githubusercontent.com/mdecourse/d306a1f57e53bfd6466eaae20bcb9439/raw/2160a12b9fec9707a120a383ed5d38b9b78a02cf/snake.py</a> 將 <a href="https://gist.github.com/mdecourse/d306a1f57e53bfd6466eaae20bcb9439">https://gist.github.com/mdecourse/d306a1f57e53bfd6466eaae20bcb9439</a> 作為 <a href="https://mde.tw/cp2021/content/run.html">https://mde.tw/cp2021/content/run.html</a> 頁面中 src 變數的值, 就可以在頁面中導入程式碼並執行)</p>
-<h2>Python</h2>
-<h4>4 小時 Python 互動學習:</h4>
-<p style="padding-left: 30px;"><a href="https://www.freecodecamp.org/news/want-to-learn-python-heres-our-free-4-hour-interactive-course/">https://www.freecodecamp.org/news/want-to-learn-python-heres-our-free-4-hour-interactive-course/</a></p>
-<h4>Princeton Python 課程簡介:</h4>
-<p style="padding-left: 30px;"><a href="https://introcs.cs.princeton.edu/python/home/">https://introcs.cs.princeton.edu/python/home/</a></p>
-<h2>run1</h2>
+<h2>run</h2>
 <p>第一種在網頁執行 Brython 程式的方法, 是使用者在網際程式編輯區輸入 Brython 程式碼, 必須手動按下 Run 才能執行. 本網頁 html 的 <a href="/downloads/run1.txt">run1.txt</a>.</p>
 <!-- 導入 brython 程式庫 -->
 <p>
@@ -751,7 +746,7 @@ def run():
     try:
         url = doc.query["src"]
     except:
-        url = "https://gist.githubusercontent.com/mdecourse/e896a4705a95ac8cc4147b355b0e87ef/raw/8954b8280c524c5781dc3c0b3565bc489d3aa3a3/cango_gear1.py"
+        url = "https://gist.githubusercontent.com/sdegbsvrtg/605267498a449aadb15a30442fd01d08/raw/e10bd008fd89eabff8f70efa89d1df0988b692ba/W13-S"
     prog = open(url).read()
 
     # 將程式載入編輯區
@@ -794,253 +789,8 @@ run()
 <script src="https://mde.tw/cp2021/cmsimde/static/sylvester.js"></script>
 <script src="https://mde.tw/cp2021/cmsimde/static/PrairieDraw.js"></script>
 </p>
-<h2>run2</h2>
-<p>第二種執行 Brython 程式的方法, 是將 Brython 程式存在 Gist, 利用 run.html?src=Gist_URL, <a href="https://mde.tw/cp2021/content/run.html">run.html</a> 中的 Javascript 就會導入此 Gist 程式並自動執行.</p>
-<p><a href="https://mde.tw/cp2021_hw/content/run.html?src=https://gist.githubusercontent.com/mdecourse/e896a4705a95ac8cc4147b355b0e87ef/raw/8954b8280c524c5781dc3c0b3565bc489d3aa3a3/cango_gear1.py">按下導入 cango_gear1.py 且自動執行</a></p>
-<p>上述連結為:</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">https://mde.tw/cp2021_hw/content/run.html?src=https://gist.githubusercontent.com/mdecourse/e896a4705a95ac8cc4147b355b0e87ef/raw/8954b8280c524c5781dc3c0b3565bc489d3aa3a3/cango_gear1.py</pre>
-<p>run.html 後的變數為 ?src=<code class="js comments">https://gist.githubusercontent.com/mdecourse/e896a4705a95ac8cc4147b355b0e87ef/raw/8954b8280c524c5781dc3c0b3565bc489d3aa3a3/cango_gear1.py</code></p>
-<p>其中的 <code class="js comments">e896a4705a95ac8cc4147b355b0e87ef</code> 為 gist 檔案群組編號, 而隨後的 <code class="js comments">8954b8280c524c5781dc3c0b3565bc489d3aa3a3</code> 則為 cango_gear1.py 的版次編號.</p>
-<p>本網頁的 html <a href="/downloads/run2.txt">run2.txt</a>.</p>
-<h2>run3</h2>
-<p>第三種在網頁中執行 Brython 的方法, 是直接將程式寫在 html 網頁中執行. 本頁面的 html 程式碼為 <a href="/downloads/run3.txt">run3.txt</a>.</p>
-<!-- 導入 brython 程式庫 -->
-<p>
-<script src="/static/brython.js"></script>
-<script src="/static/brython_stdlib.js"></script>
-</p>
-<!-- 啟動 Brython -->
-<p>
-<script>
-window.onload=function(){
-brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
-}
-</script>
-<script type="text/python3">
-# Spur Gear in Cango and gearUtils-09.js
-from browser import document as doc
-from browser import html
-from browser import window
-import browser.timer
-import math
-# 利用 html 建立一個 CANVAS 標註物件, 與變數 canvas 對應
-canvas = html.CANVAS(width = 600, height = 400)
-# 將 canvas 標註的 id 設為 "cango_gear"
-canvas.id = "cango_gear"
-# 將 document 中 id 為 "brython_div" 的標註
-# 設為與 brython_div 變數對應
-brython_div = doc["brython_div"]
-# 將 canvas 標註放入 brython_div 所在位置
-brython_div <= canvas
-# 將頁面中 id 為 cango_gear 的 CANVAS 設為與 canvas 對應
-canvas = doc["cango_gear"]
-# convert Javascript objects to Brython variables
-cango = window.Cango.new
-circle = window.circle.new
-shape = window.Shape.new
-path = window.Path.new
-creategeartooth = window.createGearTooth.new
-svgsegs = window.SVGsegs.new
-# 經由 Cango 轉換成 Brython 的 cango
-# 指定將圖畫在 id="cango_gear" 的 canvas 上
-cgo = cango("cango_gear")
-# 以下將要使用 gearUtils-09.js 畫出正齒輪外形
-# 假設齒數為 25
-num = 25
-# 利用 gearUtils-09 產生單一齒輪外形資料
-tooth = creategeartooth(10, num, 20)
-# 在 Cango 中, 只有 SVG 才能 rotate, appendPath 或 joinPath
-# 將齒輪外形轉為 SVG segment
-toothSVG = svgsegs(tooth)
-path1 = path(toothSVG.scale(1), {"degs": 45, "x": 100, "y": 100, "strokeColor": "#606060"})
-#print(path1)
-# SVG list
-circle = circle(50)
-#print(circle)
-circleSVG = svgsegs(circle)
-#print(circleSVG)
-# 若將 circleSVG 轉為 Cango path, 則可以用 cgo.render()
-#circlePath = path(circleSVG, {"x": 100, "y": 100, "strokeColor": "#606060"})
-#cgo.render(circlePath)
-# svgsegs 資料可以 joinPath 或 appendPath
-# joinPath 按照頭尾順序銜接
-# appendPath 則無順序銜接
-# 從 toothSVG 複製出單齒 SVG 資料
-one = toothSVG.dup()
-# 以照齒數, 逐一複製並附加在原單齒資料中
-# 第一齒的資料已經在 toothSVG 中, 因此重複迴圈從 1 開始
-for i in range(1, num):
-    newSVG = one.rotate(360*i/num)
-    toothSVG = toothSVG.appendPath(newSVG)
-# 將 SVG 轉為 path 資料
-#gear = path(toothSVG, {"x": 150, "y": 150, "strokeColor": "#606060"})
-# path 資料可以透過 cgo.render()顯示繪圖物件
-#cgo.render(gear)
-# 當 circle 接外齒使用 appendPath
-toothSVG = toothSVG.appendPath(circleSVG)
-#print(toothSVG)
-spurPath = path(toothSVG, {"x": 150, "y": 150, "strokeColor": "#606060"})
-cgo.render(spurPath)
-</script>
-</p>
-<!-- Brython 程式執行的結果, 都以 brython_div 作為切入位置 -->
-<div id="brython_div"></div>
-<!-- 導入 gearUtils-0.9.js Cango 齒輪繪圖程式庫 -->
-<p>
-<script src="https://mde.tw/cp2021/cmsimde/static/Cango-24v03-min.js"></script>
-<script src="https://mde.tw/cp2021/cmsimde/static/gearUtils-09.js"></script>
-<script src="https://mde.tw/cp2021/cmsimde/static/SVGpathUtils-6v03-min.js"></script>
-<script src="https://mde.tw/cp2021/cmsimde/static/sylvester.js"></script>
-<script src="https://mde.tw/cp2021/cmsimde/static/PrairieDraw.js"></script>
-</p>
-<h2>Server</h2>
-<p>在電腦輔助設計室中的 11 台舊電腦, 因為第三磁區並沒有保護, 因此可以設定為 Flask 與 Fossil SCM server 主機.</p>
-<p>六台新電腦中的一台可以透過 <a href="https://support.microsoft.com/zh-tw/windows/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%81%A0%E7%AB%AF%E6%A1%8C%E9%9D%A2-5fe128d5-8fb1-7a23-3b8a-41e636865e8c">remote desktop</a> 連線至各分組的伺服器進行設定.</p>
-<p>至於在 Windows 10 中可以利用 <a href="https://nssm.cc/">https://nssm.cc/</a> 將應用程式設為 service.</p>
-<p style="padding-left: 30px;">nssm install 服務名稱</p>
-<p style="padding-left: 30px;">nssm edit 服務名稱</p>
-<h4>Windows 10 中的動態課程網頁系統:</h4>
-<h4 style="padding-left: 30px;">以 waitress 執行 cmsimde/wsgi.py:</h4>
-<p style="padding-left: 60px;">python -m pip install waitress</p>
-<p>建立一個 waitress_server.py:</p>
-<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false"># 執行前, 必須要先利用 python -m pip install waitress 安裝 wairess 模組
-# 接著從 waitress 導入 serve
-from waitress import serve
- 
-# 導入 flaskapp
-"""
-在不將 cmsimde 目錄納入 sys.path 搜尋路徑時, 
-可以複製一份 cmsimde/nocache.py 至倉儲目錄. 
-或者將 cmsimde 納入系統搜尋路徑中, 
-且必須放在導入 flaskapp  之前
-"""
-import sys
-sys.path.append("./cmsimde")
-from cmsimde import flaskapp
- 
-# run flaskapp.app with production waitress
-serve(flaskapp.app, host='0.0.0.0', port=5000, url_scheme='https')</pre>
-<p>接著先除去 url_scheme='https' 後以 python waitress_server.py 執行. cmsimde 主機將可透過瀏覽器連結 <a href="http://server_ip:5000">http://server_ip:5000</a></p>
-<p>接下來則可以利用 <a href="https://www.stunnel.org/">Stunnel</a> 作為 https 代理主機, 作為 <a href="http://server_ip:5000">http://server_ip:5000</a> 與外部瀏覽器連接的代理轉接者.</p>
-<h4>stunnel.conf 設定內容:</h4>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">[https]
-accept = 8443
-connect = 5000
-cert = fullchain.pem
-key = privkey.pem
-TIMEOUTclose = 0</pre>
-<p>cmsimde 系統的靜態網頁則可以利用 <a href="https://nginx.org/">Nginx</a> 伺服.</p>
-<p>Nginx 在 Ubuntu /etc/nginx/sites-available/default 中的設定:</p>
-<pre class="brush:js;auto-links:false;toolbar:false" contenteditable="false">server {
-    listen 80;
-    listen [::]:80;
-    root /home/wcm2021/newcms;
-    index index.html;
-   
-    location /static {
-        alias /home/wcm2021/newcms/cmsimde/static/;
-    }
-   
-    location /downloads {
-        alias /home/wcm2021/newcms/downloads/;
-    }
-   
-    location /images {
-        alias /home/wcm2021/newcms/images/;
-    }
-   
-    location / {
-            try_files $uri $uri/ =404;
-    } 
-       
-    location /blog {
-        alias /home/wcm2021/cmsimfly/blog/;
-    }
-   
-    location /reveal {
-        alias /home/wcm2021/cmsimfly/reveal/;
-    }
-}
-   
-server {
-    listen 443 ssl;
-    #listen [::]:443 ssl ipv6only=on;
-    
-    location /static {
-        alias /home/wcm2021/cmsimfly/static/;
-    }
-    
-    location / {
-        include uwsgi_params;
-        uwsgi_pass  127.0.0.1:8080;
-    }
-    
-    #server_name ipv4_ip; 
-    #ssl on;
-    ssl_certificate /etc/stunnel/localhost.crt;
-    ssl_certificate_key /etc/stunnel/localhost.key;
-    ssl_session_timeout 5m;
-    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
-    ssl_prefer_server_ciphers on;
-    try_files $uri $uri/ =404;
-}
-    
-server {
-    #listen 89 default_server;
-    #listen [::]:89 default_server ipv6only=on;
-    
-    listen 8943 ssl;
-    #listen [::]:8943 ssl ipv6only=on;
-    
-    location /static {
-        alias /home/wcm2021/cmsimfly2/static/;
-    }
-    
-    location / {
-        include uwsgi_params;
-        uwsgi_pass  127.0.0.1:8082;
-    }
-    
-    #server_name ipv4_ip;
-    #ssl on;
-    ssl_certificate /etc/stunnel/localhost.crt;
-    ssl_certificate_key /etc/stunnel/localhost.key;
-    ssl_session_timeout 5m;
-    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
-    ssl_prefer_server_ciphers on;
-    try_files $uri $uri/ =404;
-}
-   
-server {
-    #listen 88 default_server;
-    #listen [::]:88 default_server ipv6only=on;
-    
-    listen 8843 ssl;
-    #listen [::]:8843 ssl ipv6only=on;
-    
-    location /static {
-        alias /home/wcm2021/newcms/cmsimde/static/;
-    }
-    
-    location / {
-        include uwsgi_params;
-        uwsgi_pass  127.0.0.1:8081;
-    }
-    
-    #server_name ipv4_ip;
-    #ssl on;
-    ssl_certificate /etc/stunnel/localhost.crt;
-    ssl_certificate_key /etc/stunnel/localhost.key;
-    ssl_session_timeout 5m;
-    ssl_protocols SSLv3 TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers "HIGH:!aNULL:!MD5 or HIGH:!aNULL:!MD5:!3DES";
-    ssl_prefer_server_ciphers on;
-    try_files $uri $uri/ =404;
-}</pre>
 <p></p>
-<h1>W10</h1>
+<p></p><h1>W10</h1>
 <p>W10 之後, 開始執行 <span style="background-color: #ccffcc;">HW3</span> 與 <span style="background-color: #ccffcc;">Final Project</span>.</p>
 <p>從 cp2021 課程內容中可知計算機程式的課程目的:</p>
 <p style="padding-left: 30px;">鼓勵每一位同學都能及早<span style="background-color: #ffff99;">確定努力的目標</span>, 證明自己具備<span style="background-color: #ffff99;">獨立研究與解題能力</span>.</p>
@@ -2447,7 +2197,7 @@ bfs(visited, graph, 'A')</pre>
 <p style="padding-left: 30px;"><span style="background-color: #ffff99;">下一個階段將要導入 <a href="https://github.com/pyodide/pyodide" style="background-color: #ffff99;">https://github.com/pyodide/pyodide</a></span></p>
 <p>EXAM</p>
 <h1>EXAM</h1>
-<h2>W13</h2>
+<h2>W13-英</h2>
 <p>第一種在網頁執行 Brython 程式的方法, 是使用者在網際程式編輯區輸入 Brython 程式碼, 必須手動按下 Run 才能執行.</p>
 <!-- 導入 brython 程式庫 -->
 <script src="/static/brython.js"></script>
@@ -2498,6 +2248,97 @@ def run():
         url = doc.query["src"]
     except:
         url = "https://gist.githubusercontent.com/sdegbsvrtg/5b786a5c78269b83412ef625654b9c23/raw/0f01cb54b3f3d6abef53e0f816076902891f09a7/W13"
+    prog = open(url).read()
+
+    # 將程式載入編輯區
+    Ace.editor.setValue(prog)
+    Ace.editor.scrollToRow(0)
+    Ace.editor.gotoLine(0)
+    # 直接執行程式
+    #ns = {'__name__':'__main__'}
+    #exec(prog, ns)
+    # 按下 run 按鈕
+    #Ace.run()
+
+# 執行程式, 顯示輸出結果與清除輸出結果及對應按鈕綁定
+doc['kw_run'].bind('click', Ace.run)
+doc['kw_show_console'].bind('click', Ace.show_console)
+doc['kw_clear_console'].bind('click', Ace.clear_console)
+doc['clear_bd'].bind('click', clear_bd)
+# 呼叫函式執行
+run()
+</script>
+</p>
+<p><!-- 用來顯示程式碼的 editor 區域 --></p>
+<div id="kw_editor" style="width: 600px; height: 300px;"></div>
+<p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
+<!-- 存擋表單開始 --><form><label>Filename: <input id="kw_filename" placeholder="input file name" type="text"/>.py</label> <input onclick="doSave('kw_py_src', 'kw_filename');" type="submit" value="Save"/></form><!-- 存擋表單結束 -->
+<p></p>
+<!-- 執行與清除按鈕開始 -->
+<p><button id="kw_run">Run</button> <button id="kw_show_console">Output</button> <button id="kw_clear_console">清除輸出區</button><button id="clear_bd">清除繪圖區</button><button onclick="window.location.reload()">Reload</button></p>
+<!-- 執行與清除按鈕結束 -->
+<p></p>
+<!-- 程式執行 ouput 區 -->
+<div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console"></textarea></div>
+<!-- Brython 程式執行的結果, 都以 brython_div 作為切入位置 -->
+<div id="brython_div"></div>
+<!-- 導入 gearUtils-0.9.js Cango 齒輪繪圖程式庫 -->
+<script src="https://mde.tw/cp2021/cmsimde/static/Cango-24v03-min.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/gearUtils-09.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/SVGpathUtils-6v03-min.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/sylvester.js"></script>
+<script src="https://mde.tw/cp2021/cmsimde/static/PrairieDraw.js"></script>
+<h2>W13-中</h2>
+<p>第一種在網頁執行 Brython 程式的方法, 是使用者在網際程式編輯區輸入 Brython 程式碼, 必須手動按下 Run 才能執行.</p>
+<!-- 導入 brython 程式庫 -->
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- 啟動 Brython -->
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['/static/','./../downloads/py/']});
+}
+</script>
+<p><!-- 導入 FileSaver 與 filereader --></p>
+<p>
+<script src="/static/ace/FileSaver.min.js" type="text/javascript"></script>
+<script src="/static/ace/filereader.js" type="text/javascript"></script>
+</p>
+<p><!-- 導入 ace --></p>
+<p>
+<script src="/static/ace/ace.js" type="text/javascript"></script>
+<script src="/static/ace/ext-language_tools.js" type="text/javascript"></script>
+<script src="/static/ace/mode-python3.js" type="text/javascript"></script>
+<script src="/static/ace/snippets/python.js" type="text/javascript"></script>
+</p>
+<p><!-- 請注意, 這裡使用 Javascript 將 localStorage["py_src"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
+<p>
+<script type="text/javascript">
+function doSave(storage_id, filename){
+    var blob = new Blob([localStorage[storage_id]], {type: "text/plain;charset=utf-8"});
+    filename = document.getElementById(filename).value
+    saveAs(blob, filename+".py");
+}
+</script>
+</p>
+<p><!-- 印出版次與關鍵字程式 --></p>
+<p>
+<script type="text/python3">
+from browser import document as doc
+import ace
+# 清除畫布
+def clear_bd(ev):
+    bd = doc["brython_div"]
+    bd.clear()
+# Brython 3.3.4 內建的 container 名稱為  'container' 且 turtle 輸出為 svg 必須使用 div 訂定 id
+Ace = ace.Editor(editor_id="kw_editor", console_id="kw_console", container_id="kw__container", storage_id="kw_py_src" )
+# 從 gist 取出程式碼後, 放入 editor 作為 default 程式
+def run():
+    # 利用 get 取下 src 變數值
+    try:
+        url = doc.query["src"]
+    except:
+        url = "https://gist.githubusercontent.com/sdegbsvrtg/af446af29edf55645f1b4ae3781e9b80/raw/b5cdf660613854db14585f9908c5d5eb4fa22c49/W13-2"
     prog = open(url).read()
 
     # 將程式載入編輯區
